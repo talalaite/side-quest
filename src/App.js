@@ -1,56 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+
+import "./App.css";
+import Input from "./components/Input";
+import TodoItem from "./components/TodoItem";
+
+import { useSelector } from "react-redux";
+import { selectTodoList } from "./features/todoSlice";
 
 function App() {
+  const todoList = useSelector(selectTodoList);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <div className="app__container">
+        <h1 className="app__headline">MY TODO LIST</h1>
+        <Input />
+        <div className="app__todosContainer">
+          {todoList.map((item) => (
+            <TodoItem name={item.item} done={item.done} id={item.id} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
