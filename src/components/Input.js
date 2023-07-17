@@ -34,6 +34,8 @@ const Input = () => {
 export default Input;
 
 // TODO:
-// save todo items to session storage, so it would not reset after updating
 // don't do the second point do dede aurimas task instead
-// clone project and adapt to typescript
+// 2. clone project and adapt to typescript
+
+// DONE
+// 1. save todo items to session storage, so it would not reset after updating

@@ -14,8 +14,10 @@ import { createSlice } from "@reduxjs/toolkit";
 //   todoList: [],
 // };
 
+const todosItems = sessionStorage.getItem("todosItems");
+
 const initialState = {
-  todoList: [],
+  todoList: todosItems ? JSON.parse(todosItems) : [],
 };
 
 const todoSlice = createSlice({
@@ -24,6 +26,7 @@ const todoSlice = createSlice({
   reducers: {
     saveTodo: (state, action) => {
       state.todoList.push(action.payload);
+      sessionStorage.setItem("todosItems", JSON.stringify(state.todoList));
     },
     setCheck: (state, action) => {
       state.todoList = state.todoList.map((item) => {
@@ -33,10 +36,12 @@ const todoSlice = createSlice({
 
         return item;
       });
+      sessionStorage.setItem("todosItems", JSON.stringify(state.todoList));
     },
     deleteTodoItem: (state, action) => {
       const itemId = action.payload;
       state.todoList = state.todoList.filter((item) => item.id !== itemId);
+      sessionStorage.setItem("todosItems", JSON.stringify(state.todoList));
     },
   },
 });
